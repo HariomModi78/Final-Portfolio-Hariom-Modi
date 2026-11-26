@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, Globe, Layers, Server, ExternalLink, Github, CheckCircle2, Terminal } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Sparkles, Globe, Layers, Server, ExternalLink, Github, CheckCircle2, Terminal, ArrowRight } from 'lucide-react';
 import { projects, projectCategories } from '../data/projects';
 import ChapterLabel from '../components/ChapterLabel';
 import CornerStamps from '../components/CornerStamps';
@@ -96,25 +97,61 @@ export default function Projects() {
                     <span className="project-featured-badge">
                       {project.featuredLabel}
                     </span>
-                    <h2 className="showcase-project-name">{project.title}</h2>
+                    <h2 className="showcase-project-name">
+                      <Link to={`/projects/${project.id}`} className="hover-red-link">
+                        {project.title}
+                      </Link>
+                    </h2>
                     <h3 className="showcase-brand-name">BRAND: <span className="text-red">{project.brandName}</span></h3>
                     <p className="showcase-subtitle">{project.subtitle}</p>
                   </div>
 
                   <div className="showcase-actions-top">
+                    <Link 
+                      to={`/projects/${project.id}`}
+                      className="btn-neo btn-neo-primary"
+                      title="Open Dedicated Case Study Page"
+                    >
+                      <ArrowRight size={18} />
+                      <span>OPEN PROJECT PAGE</span>
+                    </Link>
                     {project.liveUrl && (
                       <a 
                         href={project.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="btn-neo btn-neo-primary"
+                        className="btn-neo btn-neo-secondary"
                         title="View Live Deployed Project"
                       >
                         <ExternalLink size={18} />
-                        <span>VIEW LIVE PROJECT</span>
+                        <span>LIVE PREVIEW</span>
                       </a>
                     )}
-                    {project.githubUrl && (
+                    {project.githubFrontend && (
+                      <a 
+                        href={project.githubFrontend} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-neo btn-neo-secondary"
+                        title="View Frontend Repository"
+                      >
+                        <Github size={18} />
+                        <span>FRONTEND REPO</span>
+                      </a>
+                    )}
+                    {project.githubBackend && (
+                      <a 
+                        href={project.githubBackend} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn-neo btn-neo-secondary"
+                        title="View Backend Repository"
+                      >
+                        <Github size={18} />
+                        <span>BACKEND REPO</span>
+                      </a>
+                    )}
+                    {project.githubUrl && !project.githubFrontend && (
                       <a 
                         href={project.githubUrl} 
                         target="_blank" 
@@ -131,11 +168,13 @@ export default function Projects() {
 
                 {/* Banner / Media */}
                 <div className="showcase-media-box">
-                  <img 
-                    src={project.image} 
-                    alt={`${project.title} Preview`} 
-                    className="showcase-img"
-                  />
+                  <Link to={`/projects/${project.id}`} title="Click to view full project case study">
+                    <img 
+                      src={project.image} 
+                      alt={`${project.title} Preview`} 
+                      className="showcase-img"
+                    />
+                  </Link>
                   <div className="showcase-live-pill">
                     <span className="live-indicator-dot"></span>
                     <span>LIVE ON RENDER: {project.liveUrl}</span>

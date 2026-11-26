@@ -229,24 +229,24 @@ export default function Home() {
         <div className="container">
           <div className="creations-header-row reveal-on-scroll">
             <div>
-              <ChapterLabel chapter="CHAPTER 02" title="FEATURED CREATION" />
+              <ChapterLabel chapter="CHAPTER 02" title="FEATURED CREATIONS" />
               <h2 className="section-title">
-                FLAGSHIP <span className="text-red">PROJECT.</span>
+                FLAGSHIP <span className="text-red">PROJECTS.</span>
               </h2>
               <p className="section-subtitle">
-                A verified full-stack tournament management system built with Node.js, Express, MongoDB, and EJS.
+                Production-ready full-stack applications engineered with the MERN stack, RESTful APIs, and modern architecture.
               </p>
             </div>
 
             <div className="creations-more-link">
               <Link to="/projects" className="comic-note red hover-lift">
-                View Project Details →
+                View All Projects →
               </Link>
             </div>
           </div>
 
-          {/* Project Card */}
-          <div className="reveal-on-scroll">
+          {/* Project Cards Grid */}
+          <div className="home-projects-grid reveal-on-scroll">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
